@@ -81,15 +81,15 @@ TCP（Transmission Control Protocol，传输控制协议）是互联网协议栈
   2136  4015 68841 total
 ``` 
 ### 资源
-|instance |LUT|FF|
-|---|---|---|
-|u_mac   | 667       | 626       |
-|u_mac_recv_cpu| 249 | 162       |
-|u_tcp_ack_recv| 195       | 261       |
-|u_tcp_flow_retransmission | 517       | 720       |
-|u_tcp_send    | 521       | 539       |
-|u_udp_send    | 535       | 466       |
-|u_mac_xmit_cpu|34        | 31        |
+| instance | LUT | FF |
+| --- | --- | --- |
+| u_mac   | 667       | 626       |
+| u_mac_recv_cpu | 249 | 162       |
+| u_tcp_ack_recv | 195       | 261       |
+| u_tcp_flow_retransmission  | 517       | 720       |
+| u_tcp_send     | 521       | 539       |
+| u_udp_send     | 535       | 466       |
+| u_mac_xmit_cpu | 34        | 31        |
 
 ### 速度
   977MBps
