@@ -32,7 +32,7 @@ TCP（Transmission Control Protocol，传输控制协议）是互联网协议栈
    TCP连接建立阶段由Picorv32处理，建立起连接后，配置RTL相关寄存器和模板，将数据传输控制权转交给RTL。RTL部分检测到断开连接或者重置连接标志后，控制权重新转交给CPU。
    在将控制权由cpu转移到RTL时，需要从LWIP的tcp状态复制给RTL。转回时，需要反向同步。
 ### 模块
-  1. 框图
+  1.  框图  
    ![tcp_block2](tcp_block2.png)  
   2. mac_recv_cpu  
     把gmac接收到的数据保存到内部BlockRam，等待cpu处理。鉴于局域存在大量的广播数据，处理这些广播数据将耗尽CPU处理能力，本模块还实现了包过滤功能，过滤所有不是针对本机ARP查询的广播包。
@@ -82,7 +82,7 @@ TCP（Transmission Control Protocol，传输控制协议）是互联网协议栈
 ``` 
 ### 资源
 |instance |LUT|FF|
-|-|-|-|
+|---|---|---|
 |u_mac   | 667       | 626       |
 |u_mac_recv_cpu| 249 | 162       |
 |u_tcp_ack_recv| 195       | 261       |
