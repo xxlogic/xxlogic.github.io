@@ -80,7 +80,8 @@ TCP（Transmission Control Protocol，传输控制协议）是互联网协议栈
   129   236  3880 mac_xmit_cpu.v
   2136  4015 68841 total
 ``` 
-### 资源
+### 资源  
+
 | instance | LUT | FF |
 | --- | --- | --- |
 | u_mac   | 667       | 626       |
@@ -92,4 +93,5 @@ TCP（Transmission Control Protocol，传输控制协议）是互联网协议栈
 | u_mac_xmit_cpu | 34        | 31        |
 
 ### 速度
+
   977MBps
