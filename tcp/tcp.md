@@ -32,21 +32,21 @@ TCP（Transmission Control Protocol，传输控制协议）是互联网协议栈
    TCP连接建立阶段由Picorv32处理，建立起连接后，配置RTL相关寄存器和模板，将数据传输控制权转交给RTL。RTL部分检测到断开连接或者重置连接标志后，控制权重新转交给CPU。
    在将控制权由cpu转移到RTL时，需要从LWIP的tcp状态复制给RTL。转回时，需要反向同步。
 ### 模块
-  0. 框图
+  1. 框图
    ![tcp_block2](tcp_block2.png)  
-  1. mac_recv_cpu  
+  2. mac_recv_cpu  
     把gmac接收到的数据保存到内部BlockRam，等待cpu处理。鉴于局域存在大量的广播数据，处理这些广播数据将耗尽CPU处理能力，本模块还实现了包过滤功能，过滤所有不是针对本机ARP查询的广播包。
     鉴于cpu仅用于低速模式的数据，使用了2K字节的缓冲区。
     包过滤器可以配置，正常工作状态为接收本机MAC和针对本机的ARP查询广播包。
-  2. mac_xmit_cpu  
+  3. mac_xmit_cpu  
     提供发送数据包的功能。本模块使用1k字节的缓冲区。由CPU写入后，发送到GMAC
-  3. tcp_ack_recv
+  4. tcp_ack_recv
     处理gmac接收到的数据包，提取数据报的信息。输出 ack_seqnum_valid,ack_seqnum,tcp_window,tcp_flags_is_fin_rst 信息。    
     本模块使用一个由CPU配置的64(实际TCP使用12+2+40)字节模板,如果模板中的项匹配，而且IP/TCP校验和正确，则提取信息。
-  4. tcp_send
+  5. tcp_send
     从tcp_flow_retransmission接收需要传输的tcp序列号以及内存地址，读取数据后打包发送给gmac模块。
     本模块也采用模板实现,由cpu配置一个64字节的模板。本模块在发送过程中，修改其中的校验和序列号等信息，然后发送给gmac模块。
-  5. tcp_flow_retransmission
+  6. tcp_flow_retransmission
     处理从tcp_ack_recv接收过来的ack_seqnum,tcp_window,tcp_flags_is_fin_rst信号，产生 tcp_flow_seq,data_addr给tcp_send模块。
     本模块实现了简单的流控重传机制,而没有处理拥塞控制等。
     本模块的实现算法如下：
